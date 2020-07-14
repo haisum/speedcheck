@@ -6,7 +6,7 @@ speedCheck(){
     echo "Checking speed"
     ndt7-client -format json > output.json || true
     if grep -q Failure output.json; then
-        cat <<EOF | curl --data-binary @- http://localhost:9091/metrics/job/internet_speed
+        cat <<EOF | curl --data-binary @- http://pushgateway:9091/metrics/job/internet_speed
             # TYPE download_speed gauge
             download_speed 0
             # TYPE upload_speed gauge
@@ -17,7 +17,7 @@ EOF
         uploadSpeed=$(grep -v Key output.json | jq .Upload.Value)
         downloadSpeed=$(grep -v Key output.json | jq .Download.Value)
         latency=$(grep -v Key output.json | jq .MinRTT.Value)
-        cat <<EOF | curl --data-binary @- http://localhost:9091/metrics/job/internet_speed
+        cat <<EOF | curl --data-binary @- http://pushgateway:9091/metrics/job/internet_speed
             # TYPE download_speed gauge
             download_speed $downloadSpeed
             # TYPE upload_speed gauge
@@ -39,8 +39,8 @@ main(){
     }
     while true; do
         speedCheck;
-        sleep 60s;
         echo "Waiting"
+        sleep 60s;
     done;
 }
 

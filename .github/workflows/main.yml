@@ -1,0 +1,29 @@
+on:
+  push:
+      branches:
+        - master
+      paths:
+        - 'speedcheck/*'
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Build SpeedCheck Image
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Login to docker hub
+      uses: actions-hub/docker/login@master
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build :1.0
+      run: docker build -t ${GITHUB_REPOSITORY}:1.0 .
+      working-directory: speedcheck/
+
+    - name: Push to docker hub :1.0
+      uses: actions-hub/docker@master
+      with:
+        args: push ${GITHUB_REPOSITORY}:1.0
