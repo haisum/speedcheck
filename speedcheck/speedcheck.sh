@@ -17,6 +17,7 @@ EOF
         uploadSpeed=$(grep -v Key output.json | jq .Upload.Value)
         downloadSpeed=$(grep -v Key output.json | jq .Download.Value)
         latency=$(grep -v Key output.json | jq .MinRTT.Value)
+        echo "downloadSpeed: $downloadSpeed; uploadSpeed: $uploadSpeed; latency: $latency"
         cat <<EOF | curl --data-binary @- http://pushgateway:9091/metrics/job/internet_speed
             # TYPE download_speed gauge
             download_speed $downloadSpeed
