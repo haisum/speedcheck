@@ -1,0 +1,1 @@
+https://www.sitespeed.io/documentation/throttle/

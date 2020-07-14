@@ -1,0 +1,8 @@
+# config file version
+apiVersion: 1
+datasources:
+  # <string, required> name of the datasource. Required
+  - name: Prometheus
+    type: prometheus
+    # <string> url
+    url: http://prometheus:9090
