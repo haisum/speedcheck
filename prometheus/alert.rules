@@ -6,3 +6,11 @@ groups:
   - alert: InstanceDown
     expr: up == 0
     for: 5m
+  
+  - alert: InternetDown
+    expr: download_speed < 5
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: Internet is Down

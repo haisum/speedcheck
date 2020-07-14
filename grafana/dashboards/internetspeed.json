@@ -117,7 +117,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -159,10 +159,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "floor(download_speed < 5) + 1",
-          "format": "time_series",
+          "expr": "(avg_over_time(download_speed[5m]) < 5) + 1",
           "interval": "",
-          "legendFormat": "Speed >= 1 AND <= 5 Mbits/s Where 1 = no internet",
+          "legendFormat": "Speed >=1 AND <= 5 Mbits/s where 1 = no internet",
           "refId": "A"
         }
       ],
@@ -212,7 +211,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -404,7 +403,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -423,5 +422,5 @@
   "timezone": "",
   "title": "Internet Speed",
   "uid": "internetspeed",
-  "version": 1
+  "version": 10
 }

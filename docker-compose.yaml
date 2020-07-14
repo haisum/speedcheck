@@ -23,10 +23,10 @@ services:
       - ./grafana/dashboards:/var/lib/grafana/dashboards
   alertmanager:
     image: prom/alertmanager
-    volumes:
-      - ./alertmanager/alertmanager.yml:/alertmanager.yml
-    command:
-      - '--config.file=/alertmanager.yml'
+    # volumes:
+    #   - ./alertmanager/alertmanager.yml:/alertmanager.yml
+    # command:
+    #   - '--config.file=/alertmanager.yml'
     ports:
       - '9093:9093'
 
